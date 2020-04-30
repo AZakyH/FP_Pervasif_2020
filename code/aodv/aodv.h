@@ -42,7 +42,7 @@ The AODV code developed by the CMU/MONARCH group was optimized and tuned by Sami
 #include <aodv/aodv_rtable.h>
 #include <aodv/aodv_rqueue.h>
 #include <classifier/classifier-port.h>
-
+#include <mobilenode.h>  //for manet and energy
 /*
   Allows local repair of routes 
 */
@@ -131,7 +131,7 @@ public:
         void	handle(Event*);
 private:
         AODV    *agent;
-	Event	intr;
+	       Event	intr;
 };
 
 class HelloTimer : public Handler {
@@ -140,7 +140,7 @@ public:
         void	handle(Event*);
 private:
         AODV    *agent;
-	Event	intr;
+        Event	intr;
 };
 
 class NeighborTimer : public Handler {
@@ -149,7 +149,7 @@ public:
         void	handle(Event*);
 private:
         AODV    *agent;
-	Event	intr;
+        Event	intr;
 };
 
 class RouteCacheTimer : public Handler {
@@ -158,7 +158,7 @@ public:
         void	handle(Event*);
 private:
         AODV    *agent;
-	Event	intr;
+        Event	intr;
 };
 
 class LocalRepairTimer : public Handler {
@@ -167,7 +167,7 @@ public:
         void	handle(Event*);
 private:
         AODV    *agent;
-	Event	intr;
+        Event	intr;
 };
 
 
@@ -197,19 +197,19 @@ class AODV: public Agent {
    * make some friends first 
    */
 
-        friend class aodv_rt_entry;
-        friend class BroadcastTimer;
-        friend class HelloTimer;
-        friend class NeighborTimer;
-        friend class RouteCacheTimer;
-        friend class LocalRepairTimer;
+  friend class aodv_rt_entry;
+  friend class BroadcastTimer;
+  friend class HelloTimer;
+  friend class NeighborTimer;
+  friend class RouteCacheTimer;
+  friend class LocalRepairTimer;
 
- public:
+  public:
         AODV(nsaddr_t id);
 
-        void		recv(Packet *p, Handler *);
+        void		        recv(Packet *p, Handler *);
 
- protected:
+  protected:
         int             command(int, const char *const *);
         int             initialized() { return 1 && target_; }
 
@@ -222,10 +222,10 @@ class AODV: public Agent {
 		      		double expire_time);
         void            rt_down(aodv_rt_entry *rt);
         void            local_rt_repair(aodv_rt_entry *rt, Packet *p);
- public:
+  public:
         void            rt_ll_failed(Packet *p);
         void            handle_link_failure(nsaddr_t id);
- protected:
+  protected:
         void            rt_purge(void);
 
         void            enque(aodv_rt_entry *rt, Packet *p);
@@ -268,20 +268,31 @@ class AODV: public Agent {
         void            recvReply(Packet *p);
         void            recvError(Packet *p);
 
-	/*
-	 * History management
-	 */
+      	/*
+      	 * History management
+      	 */
 	
-	double 		PerHopTime(aodv_rt_entry *rt);
+	      double 		PerHopTime(aodv_rt_entry *rt);
 
 
         nsaddr_t        index;                  // IP Address of this node
         u_int32_t       seqno;                  // Sequence Number
         int             bid;                    // Broadcast ID
 
+        /*
+         * Manet
+         */
+
+        public: 
+          double        xpos; 
+          double        ypos; 
+          double        zpos; 
+          double        iEnergy; 
+          MobileNode    *iNode; 
+
         aodv_rtable         rthead;                 // routing table
         aodv_ncache         nbhead;                 // Neighbor Cache
-        aodv_bcache          bihead;                 // Broadcast ID Cache
+        aodv_bcache         bihead;                 // Broadcast ID Cache
 
         /*
          * Timers
