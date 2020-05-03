@@ -83,7 +83,7 @@ int AODV::command(int argc, const char*const* argv) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     // fclose(fp);
   #endif
 
@@ -190,7 +190,7 @@ void BroadcastTimer::handle(Event*) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f BroadcastTimer::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -203,7 +203,7 @@ void HelloTimer::handle(Event*) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f HelloTimer::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -218,7 +218,7 @@ void NeighborTimer::handle(Event*) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f NeighborTimer::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -231,7 +231,7 @@ void RouteCacheTimer::handle(Event*) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f RouteCacheTimer::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -245,7 +245,7 @@ void LocalRepairTimer::handle(Event* p)  {  // SRD: 5/4/99
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f LocalRepairTimer::%s function",  CURRENT_TIME, __FUNCTION__);
     // fclose(fp);
   #endif
 
@@ -294,7 +294,7 @@ void AODV::id_insert(nsaddr_t id, u_int32_t bid) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -311,7 +311,7 @@ bool AODV::id_lookup(nsaddr_t id, u_int32_t bid) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -329,7 +329,7 @@ void AODV::id_purge() {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -355,7 +355,7 @@ double AODV::PerHopTime(aodv_rt_entry *rt) {
   #ifdef DEBUG    FILE *fp;
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -384,7 +384,7 @@ static void aodv_rt_failed_callback(Packet *p, void *arg) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f %s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -399,7 +399,7 @@ void AODV::rt_ll_failed(Packet *p) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -458,7 +458,7 @@ void AODV::handle_link_failure(nsaddr_t id) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -509,8 +509,8 @@ void AODV::local_rt_repair(aodv_rt_entry *rt, Packet *p) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
-    fprintf(fp, "\n%.6f  %s: Dst - %d",  CURRENT_TIME, __FUNCTION__, rt->rt_dst); 
+    fprintf(fp, "\n%.6f  AODV::%s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s: Dst - %d",  CURRENT_TIME, __FUNCTION__, rt->rt_dst); 
     fclose(fp);
   #endif
   // Buffer the packet 
@@ -530,7 +530,7 @@ void AODV::rt_update(aodv_rt_entry *rt, u_int32_t seqnum, u_int16_t metric, nsad
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
   // Buffe
@@ -547,7 +547,7 @@ void AODV::rt_down(aodv_rt_entry *rt) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -574,7 +574,7 @@ void AODV::rt_resolve(Packet *p) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -648,7 +648,7 @@ void AODV::rt_purge() {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     // fclose(fp);
   #endif
 
@@ -711,7 +711,7 @@ void AODV::recv(Packet *p, Handler*) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -772,7 +772,7 @@ void AODV::recvAODV(Packet *p) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -809,7 +809,7 @@ void AODV::recvRequest(Packet *p) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -906,7 +906,7 @@ void AODV::recvRequest(Packet *p) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f rq::%s function",  CURRENT_TIME, __FUNCTION__);
     fprintf(fp, "\n%.6f  node %d - %s: destination sending reply",  CURRENT_TIME, index, __FUNCTION__);
     fclose(fp);
   #endif // DEBUG
@@ -977,7 +977,7 @@ void AODV::recvReply(Packet *p) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fprintf(fp, "\n%.6f  node %d - %s: received a REPLY",  CURRENT_TIME, index, __FUNCTION__);
     // fclose(fp);
   #endif
@@ -1093,7 +1093,7 @@ void AODV::recvError(Packet *p) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     // fclose(fp);
   #endif
 
@@ -1166,7 +1166,7 @@ void AODV::forward(aodv_rt_entry *rt, Packet *p, double delay) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     // fclose(fp);
   #endif
 
@@ -1260,7 +1260,7 @@ void AODV::sendRequest(nsaddr_t dst) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     // fclose(fp);
   #endif
 
@@ -1395,7 +1395,7 @@ void AODV::sendReply(nsaddr_t ipdst, u_int32_t hop_count, nsaddr_t rpdst, u_int3
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fprintf(fp, "\n%.6f  sending Reply from node %d to node %d",  CURRENT_TIME, index, ipdst);
     fclose(fp);
   #endif
@@ -1441,7 +1441,7 @@ void AODV::sendError(Packet *p, bool jitter) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fprintf(fp, "\n%.6f  sending Error from node %d",  CURRENT_TIME, index);
     fclose(fp);
   #endif
@@ -1489,7 +1489,7 @@ void AODV::sendHello() {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fprintf(fp, "\n%.6f  sending Hello from node %d",  CURRENT_TIME, index);
     fclose(fp);
   #endif
@@ -1529,7 +1529,7 @@ void AODV::recvHello(Packet *p) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
@@ -1549,7 +1549,7 @@ void AODV::nb_insert(nsaddr_t id) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function: node %d add neighbour node %d",  CURRENT_TIME, __FUNCTION__, index, id);
+    fprintf(fp, "\n%.6f AODV::%s function: node %d add neighbour node %d",  CURRENT_TIME, __FUNCTION__, index, id);
     fclose(fp);
   #endif
 
@@ -1569,7 +1569,7 @@ AODV_Neighbor* AODV::nb_lookup(nsaddr_t id) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function: node %d lookup %d",  CURRENT_TIME, __FUNCTION__, index, id);
+    fprintf(fp, "\n%.6f  AODV::%s function: node %d lookup %d",  CURRENT_TIME, __FUNCTION__, index, id);
     fclose(fp);
   #endif
 
@@ -1591,7 +1591,7 @@ void AODV::nb_delete(nsaddr_t id) {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function: node %d delete node %d from neighbour list",  CURRENT_TIME, __FUNCTION__, index, id);
+    fprintf(fp, "\n%.6f AODV::%s function: node %d delete node %d from neighbour list",  CURRENT_TIME, __FUNCTION__, index, id);
     fclose(fp);
   #endif
 
@@ -1621,7 +1621,7 @@ void AODV::nb_purge() {
   #ifdef DEBUG
     FILE *fp;
     fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f  %s function",  CURRENT_TIME, __FUNCTION__);
+    fprintf(fp, "\n%.6f AODV::%s function",  CURRENT_TIME, __FUNCTION__);
     fclose(fp);
   #endif
 
