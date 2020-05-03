@@ -213,6 +213,21 @@ void HelloTimer::handle(Event*) {
   Scheduler::instance().schedule(this, &intr, interval);
 }
 
+void ClusteringTimer::handle(Event*) {
+
+  #ifdef DEBUG
+    FILE *fp;
+    fp = fopen("debug.txt", "a");
+    fprintf(fp, "\n%.6f ClusteringTimer::%s function",  CURRENT_TIME, __FUNCTION__);
+    fclose(fp);
+  #endif
+
+  // agent->sendCluster();
+  // double interval = MinHelloInterval + ((MaxHelloInterval - MinHelloInterval) * Random::uniform());
+  // assert(interval >= 0);
+  // Scheduler::instance().schedule(this, &intr, interval);
+}
+
 void NeighborTimer::handle(Event*) {
 
   #ifdef DEBUG

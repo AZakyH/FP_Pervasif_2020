@@ -143,6 +143,15 @@ private:
         Event	intr;
 };
 
+class ClusteringTimer : public Handler {
+public:
+        ClusteringTimer(AODV* a) : agent(a) {}
+        void	handle(Event*);
+private:
+        AODV    *agent;
+        Event	intr;
+};
+
 class NeighborTimer : public Handler {
 public:
         NeighborTimer(AODV* a) : agent(a) {}
@@ -299,6 +308,7 @@ class AODV: public Agent {
          */
         BroadcastTimer  btimer;
         HelloTimer      htimer;
+        ClusteringTimer ctimer;
         NeighborTimer   ntimer;
         RouteCacheTimer rtimer;
         LocalRepairTimer lrtimer;
