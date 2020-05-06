@@ -1542,6 +1542,11 @@ void AODV::sendHello() {
   rh->rp_hop_count = 1;
   rh->rp_dst = index;
   rh->rp_dst_seqno = seqno;
+  if(wasCH == 20){
+    rh->reserved[0] = 1;
+  }else{
+    rh->reserved[0] = 0;
+  }
   rh->rp_lifetime = (1 + ALLOWED_HELLO_LOSS) * HELLO_INTERVAL;
 
   // ch->uid() = 0;
@@ -1574,6 +1579,10 @@ void AODV::recvHello(Packet *p) {
   //struct hdr_ip *ih = HDR_IP(p);
   struct hdr_aodv_reply *rp = HDR_AODV_REPLY(p);
   AODV_Neighbor *nb;
+
+  if(wasCH<20 && rp->reserved[0]){ //if currnode isnt a CH and the sender is CH then calculate energy residue
+    // TODO: calculate residue and assign currnode to CH with maximum energy residue
+  }
 
   nb = nb_lookup(rp->rp_dst);
   if(nb == 0) nb_insert(rp->rp_dst);
