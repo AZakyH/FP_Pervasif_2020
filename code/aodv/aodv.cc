@@ -50,6 +50,7 @@ int nodes_count=0;
 // init treshold
 int th = -1;
 int old_th;
+int currRound = 1;
 
 #ifdef DEBUG
   static int route_request = 0;
@@ -173,6 +174,7 @@ AODV::AODV(nsaddr_t id) : Agent(PT_AODV), btimer(this), htimer(this), ntimer(thi
   zpos = 0.0; 
   MobileNode *iNode; 
   iEnergy = 1000.0; 
+  wasCH = 0;
 
   LIST_INIT(&nbhead);
   LIST_INIT(&bihead);
@@ -213,20 +215,20 @@ void HelloTimer::handle(Event*) {
   Scheduler::instance().schedule(this, &intr, interval);
 }
 
-void ClusteringTimer::handle(Event*) {
+// void ClusteringTimer::handle(Event*) {
 
-  #ifdef DEBUG
-    FILE *fp;
-    fp = fopen("debug.txt", "a");
-    fprintf(fp, "\n%.6f ClusteringTimer::%s function",  CURRENT_TIME, __FUNCTION__);
-    fclose(fp);
-  #endif
+//   #ifdef DEBUG
+//     FILE *fp;
+//     fp = fopen("debug.txt", "a");
+//     fprintf(fp, "\n%.6f ClusteringTimer::%s function",  CURRENT_TIME, __FUNCTION__);
+//     fclose(fp);
+//   #endif
 
-  // agent->sendCluster();
-  // double interval = MinHelloInterval + ((MaxHelloInterval - MinHelloInterval) * Random::uniform());
-  // assert(interval >= 0);
-  // Scheduler::instance().schedule(this, &intr, interval);
-}
+//   // agent->sendCluster();
+//   // double interval = MinHelloInterval + ((MaxHelloInterval - MinHelloInterval) * Random::uniform());
+//   // assert(interval >= 0);
+//   // Scheduler::instance().schedule(this, &intr, interval);
+// }
 
 void NeighborTimer::handle(Event*) {
 
@@ -1498,6 +1500,11 @@ void AODV::sendError(Packet *p, bool jitter) {
 /*
    Neighbor Management Functions
 */
+double fRand(double fMin, double fMax)
+{
+    double f = (double)rand() / RAND_MAX;
+    return fMin + f * (fMax - fMin);
+}
 
 void AODV::sendHello() {
   
@@ -1508,6 +1515,22 @@ void AODV::sendHello() {
     fprintf(fp, "\n%.6f  sending Hello from node %d",  CURRENT_TIME, index);
     fclose(fp);
   #endif
+
+  double pe = 5/100;
+
+  if(wasCH == 0)// node was not a CH in last 1/p round
+  {
+    th = (pe)/1.0-pe*(currRound%20);
+    double rand = fRand(0,1);
+    if(rand<th){ // currnode is CH when rand number is less than tresshold
+      wasCH = 20;
+    }
+  }
+  else
+  {
+    wasCH -= 1;
+    th = 0;
+  }
 
   Packet *p = Packet::alloc();
   struct hdr_cmn *ch = HDR_CMN(p);

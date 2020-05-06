@@ -143,14 +143,14 @@ private:
         Event	intr;
 };
 
-class ClusteringTimer : public Handler {
-public:
-        ClusteringTimer(AODV* a) : agent(a) {}
-        void	handle(Event*);
-private:
-        AODV    *agent;
-        Event	intr;
-};
+// class ClusteringTimer : public Handler {
+// public:
+//         ClusteringTimer(AODV* a) : agent(a) {}
+//         void	handle(Event*);
+// private:
+//         AODV    *agent;
+//         Event	intr;
+// };
 
 class NeighborTimer : public Handler {
 public:
@@ -298,6 +298,7 @@ class AODV: public Agent {
           double        zpos; 
           double        iEnergy; 
           MobileNode    *iNode; 
+          int           wasCH;
 
         aodv_rtable         rthead;                 // routing table
         aodv_ncache         nbhead;                 // Neighbor Cache
@@ -308,7 +309,7 @@ class AODV: public Agent {
          */
         BroadcastTimer  btimer;
         HelloTimer      htimer;
-        ClusteringTimer ctimer;
+        // ClusteringTimer ctimer;
         NeighborTimer   ntimer;
         RouteCacheTimer rtimer;
         LocalRepairTimer lrtimer;
